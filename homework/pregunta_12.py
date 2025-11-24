@@ -22,3 +22,17 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
+
+    from pathlib import Path
+    import pandas as pd
+     
+    repo_root = Path(__file__).resolve().parents[1]   # sube desde homework/ a la raíz
+    path = repo_root / "files" / "input" / "tbl2.tsv"
+    tbl2 = pd.read_csv(path, sep="\t")
+    tbl2["c5"] = tbl2["c5a"] + ":" + tbl2["c5b"].astype(str)
+    tbl2_grouped = tbl2.groupby("c0")["c5"].apply(lambda x: ",".join(sorted(x))).reset_index()
+    return tbl2_grouped
+
+if __name__ == "__main__":
+    print(pregunta_12())
+

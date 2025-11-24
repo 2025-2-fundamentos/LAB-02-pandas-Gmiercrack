@@ -20,3 +20,16 @@ def pregunta_10():
     D                   1:2:3:5:5:7
     E   1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
+
+    from pathlib import Path
+    import pandas as pd
+
+    repo_root = Path(__file__).resolve().parents[1]   # sube desde homework/ a la raíz
+    path = repo_root / "files" / "input" / "tbl0.tsv"
+    tbl0 = pd.read_csv(path, sep="\t")
+    tbl0_grouped = tbl0.groupby("c1")["c2"].apply(lambda x: ":".join(map(str, sorted(x)))).reset_index()
+    tbl0_grouped.set_index("c1", inplace=True)
+    return tbl0_grouped
+
+if __name__ == "__main__":
+    print(pregunta_10())

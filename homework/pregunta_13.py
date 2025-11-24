@@ -20,3 +20,18 @@ def pregunta_13():
     E    275
     Name: c5b, dtype: int64
     """
+
+    from pathlib import Path
+    import pandas as pd
+
+    repo_root = Path(__file__).resolve().parents[1]   # sube desde homework/ a la raíz
+    path_tbl0 = repo_root / "files" / "input" / "tbl0.tsv"
+    path_tbl2 = repo_root / "files" / "input" / "tbl2.tsv"
+    tbl0 = pd.read_csv(path_tbl0, sep="\t")
+    tbl2 = pd.read_csv(path_tbl2, sep="\t")
+    merged = pd.merge(tbl0, tbl2, on="c0")
+    result = merged.groupby("c1")["c5b"].sum()
+    return result
+
+if __name__ == "__main__":
+    print(pregunta_13())

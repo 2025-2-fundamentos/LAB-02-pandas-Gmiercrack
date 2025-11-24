@@ -23,3 +23,16 @@ def pregunta_09():
     39  39  E   5  1998-01-26  1998
 
     """
+
+    from pathlib import Path
+    import pandas as pd
+
+    repo_root = Path(__file__).resolve().parents[1]   # sube desde homework/ a la raíz
+    path = repo_root / "files" / "input" / "tbl0.tsv"
+    tbl0 = pd.read_csv(path, sep="\t")
+    tbl0["year"] = tbl0["c3"].str.slice(0, 4)
+
+    return tbl0
+
+if __name__ == "__main__":
+    print(pregunta_09())

@@ -15,3 +15,14 @@ def pregunta_06():
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
     """
+
+    from pathlib import Path
+    import pandas as pd
+
+    repo_root = Path(__file__).resolve().parents[1]   # sube desde homework/ a la raíz
+    path = repo_root / "files" / "input" / "tbl1.tsv"
+    tbl1 = pd.read_csv(path, sep="\t")
+    return sorted(tbl1["c4"].str.upper().unique().tolist())
+
+if __name__ == "__main__":
+    print(pregunta_06())

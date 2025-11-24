@@ -20,3 +20,14 @@ def pregunta_04():
     E    4.785714
     Name: c2, dtype: float64
     """
+
+    from pathlib import Path
+    import pandas as pd
+
+    repo_root = Path(__file__).resolve().parents[1]   # sube desde homework/ a la raíz
+    path = repo_root / "files" / "input" / "tbl0.tsv"
+    tbl0 = pd.read_csv(path, sep="\t")
+    return tbl0.groupby("c1")["c2"].mean()
+
+if __name__ == "__main__":
+    print(pregunta_04())

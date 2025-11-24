@@ -21,3 +21,14 @@ def pregunta_03():
     Name: count, dtype: int64
 
     """
+
+    from pathlib import Path
+    import pandas as pd
+
+    repo_root = Path(__file__).resolve().parents[1]   # sube desde homework/ a la raíz
+    path = repo_root / "files" / "input" / "tbl0.tsv"
+    tbl0 = pd.read_csv(path, sep="\t")
+    return tbl0.groupby("c1").size()
+
+if __name__ == "__main__":
+    print(pregunta_03())
